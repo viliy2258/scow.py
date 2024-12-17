@@ -1,240 +1,239 @@
 <!DOCTYPE html>
-
-<html lang="en">
-  <canvas id="snowCanvas"></canvas>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="VILIY - My Social Links">
     <meta property="og:description" content="Connect with Viliy on Instagram, Telegram, Snapchat, and YouTube!">
-    <meta property="og:image" content="https://yourwebsite.com/images/viliy_logo.png">
-    <meta property="og:url" content="https://viliy.vercel.app/">
+    <meta property="og:image" content="https://i.ibb.co/zx851Nb/65df545e51ab.jpg">
+    <meta property="og:url" content="https://viliy2258.github.io/">
     <meta property="og:type" content="website">
     <title>VILIY</title>
-</head>
-
-  <meta charset="UTF-8">
-  
     
-    <!-- Додавання іконки -->
-    <link rel="icon" href="photo_2024-12-17_22-15-09.png" type="photo_2024-12-17_22-15-09/png">
+    <!-- Іконка сайту -->
+    <link rel="icon" href="https://i.ibb.co/zx851Nb/65df545e51ab.jpg" type="image/png">
+    <!-- Шрифти та іконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Основні стилі */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+        /* Canvas для снігопаду */
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        /* Фото профілю */
+        .photo-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff5ef7, #02f5ff);
+            padding: 4px;
+            box-shadow: 0 0 10px rgba(255, 94, 247, 0.7), 0 0 10px rgba(2, 245, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-  <style>
-    body {
-      background-color: #000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-    }
+        .photo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
-    h1 {
-      font-size: 36px;
-      color: #fff;
-      margin-bottom: 50px;
-      background: linear-gradient(45deg, rgba(255, 94, 247, 1) 0%, rgba(2, 245, 255, 1) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        /* Заголовок */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff5ef7, #02f5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+        /* Кнопки */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
 
-    a {
-      text-decoration: none;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    button {
-      width: 200px;
-      height: 70px;
-      cursor: pointer;
-      color: #fff;
-      font-size: 17px;
-      border-radius: 1rem;
-      border: none;
-      position: relative;
-      background: #100720;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      transition: transform 0.3s ease;
-    }
-    
-    /* Canvas стилі */
-    #snowCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0; /* Щоб сніжинки були позаду основного контенту */
-    }
+                button {
+            width: 200px;
+            height: 70px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 17px;
+            border-radius: 1rem;
+            border: none;
+            position: relative;
+            background: #100720;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+      
+      button:hover {
+            transform: scale(1.1);
+        }
+
+        button i {
+            font-size: 24px;
+        }
+
+        button::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle farthest-corner at 10% 20%,
+                rgba(255, 94, 247, 1) 17.8%,
+                rgba(2, 245, 255, 1) 100.2%);
+            filter: blur(15px);
+            z-index: -1;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        button:active {
+            transform: scale(0.9) rotate(3deg);
+            background: radial-gradient(circle farthest-corner at 10% 20%,
+                rgba(255, 94, 247, 1) 17.8%,
+                rgba(2, 245, 255, 1) 100.2%);
+            transition: 0.5s;
+        }
 
 
-    button:hover {
-      transform: scale(1.1);
-    }
+        button:hover {
+            transform: scale(1.1);
+        }
 
-    button i {
-      font-size: 24px;
-    }
+        button i {
+            font-size: 24px;
+        }
 
-    button::after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(circle farthest-corner at 10% 20%,
-          rgba(255, 94, 247, 1) 17.8%,
-          rgba(2, 245, 255, 1) 100.2%);
-      filter: blur(15px);
-      z-index: -1;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    button:active {
-      transform: scale(0.9) rotate(3deg);
-      background: radial-gradient(circle farthest-corner at 10% 20%,
-          rgba(255, 94, 247, 1) 17.8%,
-          rgba(2, 245, 255, 1) 100.2%);
-      transition: 0.5s;
-    }
-
-    /* Підвал */
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-    }
-
-  </style>
-
+        /* Підвал */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Canvas для снігопаду -->
+    <canvas id="snowCanvas"></canvas>
 
-  <h1>Я ТУТ 👇🏻</h1>
+    <!-- Фото профілю -->
+    <div class="photo-circle">
+        <img src="https://i.ibb.co/zx851Nb/65df545e51ab.jpg" alt="Viliy Photo">
+    </div>
 
-  <div class="button-container">
+    <!-- Заголовок -->
+    <h1>Я ТУТ 👇🏻</h1>
 
-    <a href="https://www.instagram.com/viliy_3397_?igsh=ZDY3cXRjY3NpYzJ2" target="_blank">
-      <button>
-        <i class="fab fa-instagram"></i> INSTAGRAM
-      </button>
-    </a>
+    <!-- Кнопки -->
+    <div class="button-container">
+        <a href="https://www.instagram.com" target="_blank">
+            <button><i class="fab fa-instagram"></i> INSTAGRAM</button>
+        </a>
+        <a href="https://t.me" target="_blank">
+            <button><i class="fab fa-telegram-plane"></i> TELEGRAM</button>
+        </a>
+        <a href="https://www.snapchat.com" target="_blank">
+            <button><i class="fab fa-snapchat-ghost"></i> SNAPCHAT</button>
+        </a>
+        <a href="https://youtube.com" target="_blank">
+            <button><i class="fab fa-youtube"></i> YOUTUBE</button>
+        </a>
+    </div>
 
-    <a href="https://t.me/Viliy_3397_2258" target="_blank">
-      <button>
-        <i class="fab fa-telegram-plane"></i> TELEGRAM
-      </button>
-    </a>
+    <!-- Підвал -->
+    <footer>
+        &copy; 2024 All Rights Reserved | Розробник: Viliy
+    </footer>
 
-    <a href="https://www.snapchat.com/add/viliiy3349?share_id=IGZnEjTZOa0&locale=en-DE" target="_blank">
-      <button>
-        <i class="fab fa-snapchat-ghost"></i> SNAPCHAT
-      </button>
-    </a>
+    <!-- Скрипт для снігопаду -->
+    <script>
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
 
-    <a href="https://youtube.com/@viktorstudio-rt9ep?si=dn16rCyqEiqeJ0Wa" target="_blank">
-      <button>
-        <i class="fab fa-youtube"></i> YOUTUBE
-      </button>
-    </a>
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-  </div>
+        class Snowflake {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.radius = Math.random() * 2.5 + 1;
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.wind = Math.random() * 0.5 - 0.25;
+            }
+            update() {
+                this.y += this.speed;
+                this.x += this.wind;
+                if (this.y > canvas.height || this.x > canvas.width || this.x < 0) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.fill();
+            }
+        }
 
-  <footer>
-    &copy; 2024 All Rights Reserved | Розробник: Viliy
-  </footer>
-<script>
-  // Отримуємо Canvas та контекст
-  const canvas = document.getElementById('snowCanvas');
-  const ctx = canvas.getContext('2d');
+        const snowflakes = Array.from({ length: 150 }, () => new Snowflake());
 
-  // Встановлюємо розміри Canvas
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  // Клас сніжинки
-  class Snowflake {
-    constructor() {
-      this.reset();
-    }
-
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * -canvas.height;
-      this.radius = Math.random() * 3 + 2; // Розмір сніжинки
-      this.speed = Math.random() * 1 + 0.5; // Швидкість падіння
-      this.wind = Math.random() * 0.5 - 0.25; // Вітер (зсув по осі X)
-      this.opacity = Math.random() * 0.5 + 0.3; // Прозорість
-    }
-
-    update() {
-      this.y += this.speed;
-      this.x += this.wind;
-
-      // Якщо сніжинка вийшла за межі екрану, перезапускаємо її
-      if (this.y > canvas.height || this.x > canvas.width || this.x < 0) {
-        this.reset();
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  // Створюємо масив сніжинок
-  const snowflakes = [];
-  const snowflakeCount = 200; // Кількість сніжинок
-
-  for (let i = 0; i < snowflakeCount; i++) {
-    snowflakes.push(new Snowflake());
-  }
-
-  // Анімація
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Додаємо легкий прозорий чорний фон для створення ефекту затухання
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    snowflakes.forEach(snowflake => {
-      snowflake.update();
-      snowflake.draw();
-    });
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            snowflakes.forEach(snowflake => {
+                snowflake.update();
+                snowflake.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
-
 </html>
+
